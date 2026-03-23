@@ -1,34 +1,34 @@
 import { Database } from "../database/database.js"
 
 export class EntregasRepository{
-    constructor(){
-        const db = new Database()
-        this.entregas = db.getEntregas()
-        this.nextId = db.generateId()
+    constructor(database){
+        this.database = database
     }
     async listarTodos(){
-        return this.entregas
+        return this.database.getEntregas()
     }
     async buscarPorId(id){
-        return this.entregas.find((e) => e.id === id) ?? null
+        return this.database.getEntregas().find((e) => e.id === id) ?? null
     }
     async criar(dados){
+        const entregas = this.database.getEntregas()
         const novaEntrega = {
-            id: this.nextId++,
+            id: this.database.generateId(),
             ...dados,
             status:  "CRIADA",
             historico: [{
                 data: new Date().toISOString(),
-                descricao: dados.descricao 
+                descricao: "Entrega Criada" 
             }]
         }
-        this.entregas.push(novaEntrega)
-        return(novaEntrega)
+        entregas.push(novaEntrega)
+        returnnovaEntrega
     }
     async atualizar(id, dados){
-        const i = this.entregas.findIndex((e) => e.id === id)
+        const entregas = this.database.getEntregas()
+        const i = entregas.findIndex((e) => e.id === id)
         if (i === -1) return null
-        this.entregas[i] = { ...this.entregas[i], ...dados, id}
-        return this.entregas[i]
+        entregas[i] = { ...entregas[i], ...dados, id}
+        return entregas[i]
     }
 }
