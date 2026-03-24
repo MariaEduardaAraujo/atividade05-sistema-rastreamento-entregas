@@ -22,7 +22,7 @@ export class EntregasRepository{
             }]
         }
         entregas.push(novaEntrega)
-        returnnovaEntrega
+        return novaEntrega
     }
     async atualizar(id, dados){
         const entregas = this.database.getEntregas()
