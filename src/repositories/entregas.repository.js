@@ -1,5 +1,3 @@
-import { Database } from "../database/database.js"
-
 export class EntregasRepository{
     constructor(database){
         this.database = database
