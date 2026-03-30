@@ -2,6 +2,7 @@ import { IEntregasRepository } from "../interfaces/IEntregasRepository.js"
 
 export class EntregasRepository extends IEntregasRepository{
     constructor(database){
+        super()
         this.database = database
     }
     async listarTodos(){
