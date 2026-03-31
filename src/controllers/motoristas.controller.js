@@ -12,7 +12,7 @@ export class MotoristasController{
         try {
             const motoristas = await this.service.listarTodos()
             res.status(200).json(motoristas)
-        } catch (error) {
+        } catch (err) {
             next(err)
         }
     }
@@ -26,7 +26,7 @@ export class MotoristasController{
     }
     async buscarPorCPF(req, res, next){
         try{
-            const motoristas = await this.service.buscarPorCPF(Number(req.params.cpf))
+            const motoristas = await this.service.buscarPorCPF(req.params.cpf)
             res.status(200).json(motoristas)
         }catch (err){
             next(err)
