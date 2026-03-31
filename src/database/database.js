@@ -3,6 +3,7 @@ export class Database{
         this.entregas = []
         this.motoristas = []
         this.nextId = 1
+        this.nextMotoristaId = 1
     }
     getEntregas(){
         return this.entregas
@@ -12,5 +13,8 @@ export class Database{
     }
     generateId(){
         return this.nextId++
+    }
+    generateMotoristaId(){
+        return this.nextMotoristaId++
     }
 }
