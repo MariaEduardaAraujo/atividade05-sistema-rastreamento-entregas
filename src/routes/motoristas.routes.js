@@ -6,7 +6,6 @@ const router = Router()
 router.get("/", motoristasController.listarTodos)
 router.get("/:id", motoristasController.buscarPorId)
 router.post("/", motoristasController.criar)
-//router.get("/:id/entregas")
-//router.patch("/:id/atribuir")
+router.get("/:id/entregas", motoristasController.listarEntregas)
 
 export default router
