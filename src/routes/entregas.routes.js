@@ -1,13 +1,5 @@
 import { Router } from "express"
-import { Database } from "../database/database.js"
-import { EntregasRepository } from "../repositories/entregas.repository.js"
-import { EntregasService } from "../services/entregas.service.js"
-import { EntregasController } from "../controllers/entregas.controller.js"
-
-const database = new Database()
-const entregasRepository = new EntregasRepository(database)
-const entregasService = new EntregasService(entregasRepository, motoristasRepository)
-const entregasController = new EntregasController(entregasService)
+import { entregasController } from "../bootstrap.js"
 
 const router = Router()
 
