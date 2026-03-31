@@ -156,9 +156,67 @@ GET /api/motoristas/:id/entregas?status=CRIADA
 PATCH /api/entregas/:id/atribuir
 ```
 Body:
-
 ```json
 {
   "motoristaId": 1
 }
+```
+
+# Diagrama
+```
+Database 
+(Instância compartilhada)
+    ↓
+EntregasRepository      MotoristasRepository
+(IEntregasRepository)   (IMotoristasRepository)
+    ↓         ↘        ↙
+EntregasService    MotoristasService
+    ↓                  ↓
+EntregasController  MotoristasController
+    ↓                  ↓
+entregas.routes.js  motoristas.routes.js
+    ↘              ↙
+       bootstrap.js
+```
+
+# Instruções de execução
+## Como executar
+### Pré-requisitos
+- Node.js 18+
+
+### Instalação
+```bash
+npm install
+```
+### Execução
+```bash
+node server.js
+```
+
+A API estará disponível em `http://localhost:3000`
+
+##  Exemplos com cURL
+### Exemplos de requisição
+### Criar motorista
+```bash
+curl -X POST http://localhost:3000/api/motoristas \
+-H "Content-Type: application/json" \
+-d '{"nome":"João Silva","cpf":"12345678900","placaVeiculo":"ABC1D23"}'
+```
+### Criar entrega
+```bash
+curl -X POST http://localhost:3000/api/entregas \
+-H "Content-Type: application/json" \
+-d '{"descricao":"Caixa","origem":"Maceió","destino":"Recife"}'
+```
+### Atribuir motorista
+```bash
+curl -X PATCH http://localhost:3000/api/entregas/1/atribuir \
+-H "Content-Type: application/json" \
+-d '{"motoristaId":1}'
+```
+### Listar entregas do motorista
+```bash
+curl http://localhost:3000/api/motoristas/1/entregas
+```
 ```
