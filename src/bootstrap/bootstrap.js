@@ -1,10 +1,10 @@
-import { Database } from "./database/database.js"
-import { EntregasRepository } from "./repositories/entregas.repository.js"
-import { MotoristasRepository } from "./repositories/motoristas.repository.js"
-import { EntregasService } from "./services/entregas.service.js"
-import { MotoristasService } from "./services/motoristas.service.js"
-import { EntregasController } from "./controllers/entregas.controller.js"
-import { MotoristasController } from "./controllers/motoristas.controller.js"
+import { Database } from "../database/database.js"
+import { EntregasRepository } from "../repositories/entregas.repository.js"
+import { MotoristasRepository } from "../repositories/motoristas.repository.js"
+import { EntregasService } from "../services/entregas.service.js"
+import { MotoristasService } from "../services/motoristas.service.js"
+import { EntregasController } from "../controllers/entregas.controller.js"
+import { MotoristasController } from "../controllers/motoristas.controller.js"
 
 const database = new Database()
 

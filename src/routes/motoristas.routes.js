@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { motoristasController } from "../bootstrap.js"
+import { motoristasController } from "../bootstrap/bootstrap.js"
 
 const router = Router()
 

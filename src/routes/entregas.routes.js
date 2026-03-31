@@ -1,5 +1,5 @@
 import { Router } from "express"
-import { entregasController } from "../bootstrap.js"
+import { entregasController } from "../bootstrap/bootstrap.js"
 
 const router = Router()
 
