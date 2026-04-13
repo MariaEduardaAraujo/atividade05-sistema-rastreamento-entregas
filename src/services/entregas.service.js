@@ -92,7 +92,7 @@ export class EntregasService{
             ...entrega.historico,
             {
                 data: new Date().toISOString(),
-                descricao: `Motorista ${motoristaId} atribuído à entrega`,
+                descricao: `Motorista ${motorista.nome} atribuído à entrega`,
                 motoristaId: motoristaId
             }
         ]
