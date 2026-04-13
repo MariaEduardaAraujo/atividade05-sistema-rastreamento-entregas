@@ -8,23 +8,32 @@ A API permite gerenciar entregas, controlar o ciclo de vida de cada encomenda, c
 
 ## Estrutura do projeto
 src/ <br>
+├── bootstrap/ <br>
+├── config/ <br>
 ├── controllers/ <br>
-├── services/ <br>
-├── repositories/ <br>
 ├── database/ <br>
-├── routes/ <br>
-├── utils/ <br>
+├── interfaces/ <br>
 ├── middlewares/ <br>
+├── repositories/ <br>
+├── routes/ <br>
+├── services/ <br>
+├── utils/ <br>
+.env.example
 app.js <br>
 server.js
 
 A aplicação segue separação de responsabilidades:
 
+* **bootstrap**: inicializa a aplicação, conectando todas as partes e prepara o sistema para iniciar
+* **config**: armazena configurações da aplicação
 * **controllers**: recebem a requisição e devolvem a resposta HTTP
-* **services**: concentram as regras de negócio
-* **repositories**: lidam com os dados em memória
 * **database**: simula o banco de dados
-* **routes**: fazem a composição das dependências e definem os endpoints.
+* **interfaces**: definem os contratos que os repositories devem implementar
+* **middlewares**: interceptam requisições antes de chegarem aos controllers
+* **repositories**: lidam com os dados em memória
+* **routes**: fazem a composição das dependências e definem os endpoints
+* **services**: concentram as regras de negócio
+* **utils**: funções auxiliares reutilizáveis.
 
 # Funcionalidades <br>
 ## Entregas
@@ -42,6 +51,10 @@ A aplicação segue separação de responsabilidades:
 * Buscar motorista por ID
 * Listar entregas atribuídas a um motorista
 * Atribuir motorista a uma entrega.  
+
+## Relatórios
+* Exibir o status e a quantidade de entregas
+* Mostrar os motoristas ativos.
 <br>
 
 # Principais Regras de Negócio
@@ -66,6 +79,8 @@ A aplicação segue separação de responsabilidades:
 * Só é permitido atribuir motorista a entrega com status `CRIADA`
 * Não é permitido atribuir motorista `INATIVO`
 * A troca de motorista deve gerar evento no histórico da entrega. 
+
+## Relatorios
 <br>
 
 # Rotas da API
@@ -161,22 +176,33 @@ Body:
   "motoristaId": 1
 }
 ```
+## Relatórios
+
+### Entregas por status
+```http
+GET /api/relatorios/entregas-por-status
+```
+
+### Motoristas ativos
+```http
+GET /api/relatorios/motoristas-ativos
+```
 
 # Diagrama
 ```
 Database 
 (Instância compartilhada)
     ↓
-EntregasRepository      MotoristasRepository
-(IEntregasRepository)   (IMotoristasRepository)
+EntregasRepository      MotoristasRepository     RelatoriosRepository 
+(IEntregasRepository)   (IMotoristasRepository)           ↓
     ↓         ↘        ↙
-EntregasService    MotoristasService
-    ↓                  ↓
-EntregasController  MotoristasController
-    ↓                  ↓
-entregas.routes.js  motoristas.routes.js
-    ↘              ↙
-       bootstrap.js
+EntregasService    MotoristasService              RelatoriosService
+      ↓                  ↓                                ↓
+EntregasController  MotoristasController          RelatoriosController
+      ↓                  ↓                                ↓
+entregas.routes.js  motoristas.routes.js          relatorios.routes.js
+          ↘                  ↘                          ↙
+                                  bootstrap.js
 ```
 
 # Instruções de execução
@@ -190,6 +216,7 @@ npm install
 ```
 ### Execução
 ```bash
+node src/database/migration.sql.js
 node server.js
 ```
 
@@ -218,4 +245,8 @@ curl -X PATCH http://localhost:3000/api/entregas/1/atribuir \
 ### Listar entregas do motorista
 ```bash
 curl http://localhost:3000/api/motoristas/1/entregas
+```
+### Listar status e quantidade de entregas
+```bash
+curl http://localhost:3000/api/relatorios/entregas-por-status
 ```
