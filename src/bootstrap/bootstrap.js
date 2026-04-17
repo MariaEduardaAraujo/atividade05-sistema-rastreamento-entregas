@@ -1,6 +1,6 @@
 import database from "../config/database.sqlite.js"
-import { EntregasRepository } from "../repositories/entregas.repository.sqlite.js"
-import { MotoristasRepository } from "../repositories/motoristas.repository.sqlite.js"
+import { EntregasRepository } from "../repositories/entregas.repository.prisma.js"
+import { MotoristasRepository } from "../repositories/motoristas.repository.prisma.js"
 import { EntregasService } from "../services/entregas.service.js"
 import { MotoristasService } from "../services/motoristas.service.js"
 import { EntregasController } from "../controllers/entregas.controller.js"
