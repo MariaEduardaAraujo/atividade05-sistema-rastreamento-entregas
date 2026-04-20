@@ -2,9 +2,33 @@ import prisma from "../database/prisma.js"
 import { IEntregasRepository } from "../interfaces/IEntregasRepository.js"
 
 export class EntregasRepository extends IEntregasRepository{
-    async listarTodos(){
-        const entregas = await prisma.entrega.findMany()
-        return entregas
+    async listarTodos({ page = 1, limit = 10, status, motoristaId, createdDe, createdAte}){
+        const where = {
+            ...(status && { status }), 
+            ...(motoristaId && { motoristaId: Number(motoristaId) }),
+            ...(( createdDe || createdAte ) && {
+                createdAt: {
+                    ...(createdDe && { gte: new Date(createdDe)}),
+                    ...(createdAte && { lte: new Date(createdAte)})
+                }
+            })
+        }
+        const [ data, total ] = await Promise.all([
+            prisma.entrega.findMany({
+                where, 
+                skip: (page - 1) * limit,
+                take: limit,
+                include: {motorista: true, eventos: true}
+            }),
+            prisma.entrega.count({ where })
+        ])
+        return {
+            data,
+            total,
+            page,
+            limit,
+            totalPages: Math.ceil(total / limit)
+        }
     }
     async buscarPorId(id){
         const entrega = await prisma.entrega.findUnique({
