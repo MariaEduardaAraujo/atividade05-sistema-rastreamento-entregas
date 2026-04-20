@@ -12,6 +12,7 @@ model Motorista{
   nome String
   cpf String @unique
   placaVeiculo String
+  status String @default("ATIVO")
   entregas Entrega[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -33,7 +34,7 @@ model Entrega{
   destino String
   status StatusEntrega @default(CRIADA)
   motorista Motorista? @relation(fields: [motoristaId], references: [id])
-  motoristaId Int
+  motoristaId Int?
   eventos EventoEntrega[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
