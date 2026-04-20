@@ -1,6 +1,6 @@
 import Database from 'better-sqlite3';
 
-const database = new Database('api.db');
+const database = new Database('dev.db');
 database.pragma('foreign_keys = ON')
 
 export default database;
