@@ -11,10 +11,13 @@ export class EntregasController{
         this.atribuir = this.atribuir.bind(this)
     }
     async listarTodos(req, res, next){
-        try{
-            const { status } = req.query
-            const entregas = await this.service.listarTodos({ status })
-            res.status(200).json(entregas)
+        try {
+            const { status, motoristaId, createdDe, createdAte } = req.query
+            const page = Math.max(1, parseInt(req.query.page) || 1)
+            const limit = Math.min(50, Math.max(1, parseInt(req.query.limit) || 10))
+
+            const resultado = await this.service.listarTodos({ status, motoristaId, createdDe, createdAte, page, limit })
+            res.status(200).json(resultado)
         }catch (err){
             next(err)
         }
