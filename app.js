@@ -46,6 +46,7 @@ app.use("/api/entregas", entregasRouter)
 app.use("/api/motoristas", motoristasRouter)
 app.use("/api/relatorios", relatoriosRouter)
 app.use("/painel", painelRouter)
+app.use("/api/auth", autenticarRouter)
 app.use(errorMiddleware)
 
 export default app
