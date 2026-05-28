@@ -33,7 +33,7 @@ export class EntregasRepository extends IEntregasRepository{
     async buscarPorId(id){
         const entrega = await prisma.entrega.findUnique({
             where: { id: id },
-            include: { eventos: true, motorista: true }
+            include: { eventos: true, motorista: true, usuario: true }
         })
 
         if (!entrega) return null
