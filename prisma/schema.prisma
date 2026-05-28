@@ -38,6 +38,8 @@ model Entrega{
   eventos EventoEntrega[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  usuario Usuario? @relation(fields: [criadorId], references: [id])
+  criadorId Int?
 
   @@map("entrega")
 }
@@ -59,6 +61,7 @@ model Usuario{
   email String @unique
   senhaHash String
   papel String @default("OPERADOR")
+  entregas Entrega[]
 
   @@map("usuario")
 }
