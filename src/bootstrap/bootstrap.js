@@ -10,7 +10,7 @@ import { RelatoriosService } from "../services/relatorios.service.js"
 import { RelatoriosController } from "../controllers/relatorios.controller.js"
 import { EntregasController as PainelEntregasController } from "../controllers/painel/entregas.controller.js"
 import { MotoristasController as PainelMotoristasController } from "../controllers/painel/motoristas.controller.js"
-import { UsuariosRepository, UsuariosRepositoy} from "../repositories/usuarios.repository.prisma.js"
+import { UsuariosRepository} from "../repositories/usuarios.repository.prisma.js"
 import { AutenticacaoService} from "../services/auth.service.js"
 import { AutenticacaoController } from "../controllers/auth.controller.js"
 
@@ -21,7 +21,7 @@ const usuariosRepositoy = new UsuariosRepository(database)
 const entregasService = new EntregasService(entregasRepository, motoristasRepository)
 const motoristasService = new MotoristasService(motoristasRepository, entregasRepository)
 const relatoriosService = new RelatoriosService(relatoriosRepository)
-const autenticacaoService = new autenticacaoService(usuariosRepositoy)
+const autenticacaoService = new AutenticacaoService(usuariosRepositoy)
 const entregasController = new EntregasController(entregasService)
 const motoristasController = new MotoristasController(motoristasService)
 const relatoriosController = new RelatoriosController(relatoriosService)
