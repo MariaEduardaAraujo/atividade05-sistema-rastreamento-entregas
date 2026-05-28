@@ -19,8 +19,8 @@
             const emailUser = await this.usuariosRepository.buscarPorEmail(email)
             if (!emailUser) throw new AppError("Credenciais inválidas", 401)
 
-            const senha = await bcrypt.compare(senha, usuario.senhaHash)
-            if (!senha) throw new AppError("Credenciais inválidas", 401)
+            const senhaUser = await bcrypt.compare(senhaUser, usuario.senhaHash)
+            if (!senhaUser) throw new AppError("Credenciais inválidas", 401)
 
             const token = gerarAccessToken({
                 id: usuario.id,
