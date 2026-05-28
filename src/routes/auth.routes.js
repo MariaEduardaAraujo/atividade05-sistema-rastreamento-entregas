@@ -1,5 +1,7 @@
 import { Router } from "express"
 import { autenticacaoController } from "../bootstrap/bootstrap.js"
+import { autorizarMiddleware } from "../middlewares/autorizacao.middleware.js"
+import { autenticarMiddleware } from "../middlewares/autenticacao.middleware.js"
 
 const router = Router()
 
