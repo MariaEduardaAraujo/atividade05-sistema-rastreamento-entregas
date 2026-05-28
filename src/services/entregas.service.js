@@ -20,7 +20,7 @@ export class EntregasService{
         if (!entrega) throw new AppError ("Entrega não encontrada", 404)
         return entrega
     }
-    async criar({ descricao, origem, destino, motoristaId}){
+    async criar({ descricao, origem, destino, motoristaId, criadorId }){
         if (origem === destino){
             throw new AppError("Origem e Destino não podem ser iguais", 400); 
         }
@@ -31,7 +31,7 @@ export class EntregasService{
             throw new AppError("Existe uma entrega ativa com a mesma descrição, origem e destino", 409);
             
         }
-        return this.entregasRepository.criar({ descricao, origem, destino, motoristaId: motoristaId ? Number(motoristaId) : null })
+        return this.entregasRepository.criar({ descricao, origem, destino, motoristaId: motoristaId ? Number(motoristaId) : null, criadorId: criadorId ? Number(criadorId) : null })
     }
     async avancar(id){
         const entrega = await this.buscarPorId(id)
