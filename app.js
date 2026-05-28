@@ -9,6 +9,7 @@ import entregasRouter from "./src/routes/entregas.routes.js"
 import motoristasRouter from "./src/routes/motoristas.routes.js"
 import relatoriosRouter from "./src/routes/relatorios.routes.js"
 import painelRouter from "./src/routes/painel.routes.js"
+import authRouter from "./src/routes/auth.routes.js"
 import { errorMiddleware } from "./src/middlewares/error.middleware.js"
 
 const __filename = fileURLToPath(import.meta.url)
@@ -46,7 +47,7 @@ app.use("/api/entregas", entregasRouter)
 app.use("/api/motoristas", motoristasRouter)
 app.use("/api/relatorios", relatoriosRouter)
 app.use("/painel", painelRouter)
-app.use("/api/auth", autenticarRouter)
+app.use("/api/auth", authRouter)
 app.use(errorMiddleware)
 
 export default app
